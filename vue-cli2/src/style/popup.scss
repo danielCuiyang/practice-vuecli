@@ -1,0 +1,66 @@
+@import "./base.scss";
+.popup{
+    position: relative;
+    z-index: 1000;
+    .select{
+        @include wh(100%,.9rem);
+        z-index: 88;
+        padding:0 .24rem;
+        display: flex;
+        align-items: center;
+        background: #fff;
+        box-sizing: border-box;
+        &-type{
+            @include whl(50%,.4rem,.4rem);
+            @include fct(.3rem,#999999,center);
+            span{
+                @include fct(.3rem,#999999,center);
+                display: inline-block;
+                padding-right: .3rem;
+                box-sizing: border-box;
+                background: url('../image/select-icon.png') no-repeat;
+                background-size: .14rem .1rem;
+                background-position: right;
+            }
+            .active{
+                color:#fa5654;
+                background: url('../image/selected-icon.png') no-repeat;
+                background-size: .14rem .1rem;
+                background-position: right;
+            }
+        }
+    }
+    .select-popup{
+        position: fixed;
+        top: 2rem;
+        z-index: 9999;
+        width: 100%;
+        border-top: 1px solid #f2f2f2;
+        padding:0 .24rem 0 .4rem;
+        box-sizing: border-box;
+        background: #fff;
+        .applicant{
+            height: 5rem;
+            overflow-y: scroll;
+            div{
+                @include hl(.9rem);
+                @include fc(.28rem,#3b3b3b);
+            }
+            .active{
+                color:#fa5654;
+                background: url('../image/select-right.jpg')no-repeat;
+                background-position: right center;
+                background-size: .3rem .22rem;
+    
+            }
+        }
+    }
+    .mask{
+        @include wh(100%,100%);
+        background: rgba(0,0,0,.8);
+        position: fixed;
+        top: 2rem;
+        bottom: 0;
+        z-index: 888;
+    }
+}

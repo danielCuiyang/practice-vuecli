@@ -1,0 +1,176 @@
+@import "./base.scss";
+.chose-brand{
+    height: 100%;
+    position: relative;
+    .section-title{
+        @include whl(100%,.84rem,.84rem);
+        background:rgba(245,245,245,1);
+        position: relative;
+        z-index: 8888;
+        span{
+            @include fc(.28rem,#333333);
+            font-family:PingFangSC-Regular;
+            font-weight:400;
+        }
+        .brandname{
+            padding-left: .85rem;
+        }
+        .type{
+            padding-left: 2.6rem;
+        }
+        .price{
+            padding-left:.71rem;
+        }
+    }
+    .scroller{
+        padding-top: 2.84rem;
+        .list{
+            height: 1.06rem;
+            position: relative;
+            padding: 0;
+            padding-left: .82rem;
+            .company{
+                width: 3.3rem;
+                @include tofl;
+                @include fc(.3rem,#181818);
+            }
+            span{
+                float: left;                
+                font-family:PingFangSC-Regular;
+                font-weight:400;
+                line-height: 1.06rem;
+            }
+            .type{
+                @include fc(.3rem,#B0B0B0);
+                padding-left: .43rem;
+            }
+            .price{
+                @include fc(.3rem,#E23735);
+                padding-left: .7rem;
+            }
+            .pricing{
+                @include fc(.3rem,#5E86F7);
+                padding-left: .7rem;
+            }
+        }
+        .loading-layer{
+            position: relative;
+            top: -160px;
+        }
+    }
+    .bottom{
+        width:100%;
+        button{
+            float: right;
+            @include whl(2.14rem,.6rem,.6rem);
+            border-radius: .37rem;
+            border:1px solid rgba(227,55,53,1);
+            margin: .22rem .17rem 0 0;
+            background: #fff;   
+            @include fc(.28rem,#E33735);
+        }
+    }
+    .toast{
+        position: fixed;
+        background:rgba(226,55,53,.48);
+        @include whl(100%,.4rem,.4rem);
+        @include fct(.22rem,#fff,center);
+    }
+    .publish-dialog{
+        background: #fff;
+        @include wh(7.5rem,6.84rem);
+        @include trbl;
+        z-index:99999;  
+        background: url('../image/publish-success.png')no-repeat;
+        background-size: 100%;
+        .content{
+            position: absolute;
+            width: 100%;
+            top: 3rem;
+            h1{
+                @include fct(.4rem,#181818,center);
+                font-weight: 600;    
+            }
+            p{
+                @include fct(.22rem,#787878,center);
+                line-height: .42rem;
+            }
+            .rebackMyBrand{
+                display: block;
+                margin: auto;
+                margin-top: .35rem;
+                @include whl(3.2rem,.8rem,.8rem);
+                background-image: linear-gradient(90deg, 
+                #fa5654 0%, 
+                #e33735 100%), 
+            linear-gradient(
+                #e33735, 
+                #e33735);
+            background-blend-mode: normal, 
+                normal;
+                border-radius: .4rem;
+                @include fct(.24rem,#fff,center);
+            }
+            .watchPublishBrand{
+                display: block;
+                border: solid 2px #fa5654;
+                border-radius: .4rem;
+                margin: auto;
+                margin-top: .3rem;
+                @include whl(3.2rem,.8rem,.8rem);
+                @include fct(.24rem,#fa5654,center);
+
+            }
+        }
+       
+    }
+    .dialog{
+        background: #fff;
+        @include wh(6rem,3.75rem);
+        @include trbl;
+        z-index:99999;  
+        border-radius: .08rem;  
+        input{
+            display: block;
+            @include wh(4.73rem,.88rem);
+            margin: auto;
+            margin-top: 1.1rem;
+            margin-bottom: .77rem;
+            border-radius:.05rem;
+            padding-left: .2rem;
+            box-sizing: border-box;
+            border:1px solid rgba(198,198,198,1);
+        }
+        input::placeholder{
+            @include fc(.28rem,#C2C2C2);
+            font-family:PingFangSC-Regular;
+            font-weight:400;
+        }
+        .price{
+            position: absolute;
+            @include fc(.3rem,#DC1515);
+            font-family:PingFangSC-Medium;
+            font-weight:500;
+            top: 1.3rem;
+            right:.8rem;
+        }
+        span{
+            box-sizing: border-box;
+            float: left;
+            @include whl(50%,1rem,1rem);
+            font-weight:400;
+            @include fct(.36rem,#e33735,center);
+        }
+        .cancel{
+            color:#181818;
+        }
+    }
+    .mask{
+        @include wh(100%,100%);
+        background: rgba(0,0,0,.8);
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        z-index: 88888;
+    }
+}

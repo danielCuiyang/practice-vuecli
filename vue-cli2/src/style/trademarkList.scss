@@ -1,0 +1,120 @@
+@import './base.scss';
+.navlist{
+  height: .88rem;
+  border-bottom: 0.2rem solid #F5F5F5;
+  ul{
+    @include clear;
+    li{
+      font-size: .28rem;
+      color: #6C6C6C;
+      line-height: .88rem;
+      float: left;
+      margin-left: .4rem;
+      position: relative;
+      &.active{
+        color: #E33735;
+        &:after{
+          display: block;
+        }
+      }
+      &:after{
+        display: none;
+        content: "";
+        width: .3rem;
+        height: .03rem;
+        background: #E33735;
+        position: absolute;
+        border-radius: 1rem;
+        top:.66rem;left: 0;right: 0;
+        margin: auto;
+      }
+    }
+  }
+}
+
+ul.trademarkList{
+  padding: .23rem;
+  li{
+    padding: .31rem 0;
+    border-bottom: 1px solid #F5F5F5;
+    @include clear;
+    .trademarkImg{
+      width:2.18rem;
+      height:1.64rem;
+      float: left;
+      img{
+        width: 100%;
+      }
+    }
+    .reademarkMessage{
+      width: 4.60rem;
+      float: right;
+      h3{
+        font-size: .3rem;
+        color: #181818;
+        margin-bottom: .1rem;
+      }
+      p{
+        font-size: .24rem;
+        color: #666666;
+        line-height: .4rem;
+        @include tofl;
+        .number{
+          margin-left: .35rem;
+        }
+      }
+    }
+  }
+}
+
+.details{
+  .trademarkImg{
+    border-bottom: 1px solid #ECECEC;
+    padding: .35rem 0;
+    text-align: center;
+    img{
+      width: 4.23rem;
+    }
+  }
+  .trademarkName{
+    border-bottom: .16rem solid #F5F5F5;
+    line-height: .78rem;
+    padding-left: .4rem;
+    font-size: .28rem;
+    color: #333333;
+    span{
+      font-size: .28rem;
+      font-weight: 600;
+    }
+  }
+  .trademarkDetailsMsg{
+    padding: 0 .4rem;
+    border-bottom: .16rem solid #F5F5F5;
+    li{
+      line-height: .82rem;
+      font-size: .24rem;
+      color: #666;
+      border-bottom: 1px solid #ECECEC;
+      &:last-child{
+        border-bottom: none;
+      }
+    }
+  }
+  .trademarkDetailsServeList{
+    line-height: .78rem;
+    padding-left: .4rem;
+    font-size: .28rem;
+    color: #666;
+    &.backActive{
+      background-position: 95% center;
+    }
+  }
+}
+
+
+
+.backActive{
+    //background: url(../../assets/images/detailsIcon01.png)no-repeat;
+    //background-position: right center;
+    //background-size: .14rem .29rem;
+}

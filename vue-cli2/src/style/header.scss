@@ -1,0 +1,100 @@
+@import "./base.scss";
+.header{
+    @include hl(1rem);
+    @include fct(.38rem,#181818,center);
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    background: #fff;
+    @include bdb(.1rem,#F5F5F5);
+    position: relative;
+    z-index: 9999;
+    span{
+        @include fct(.38rem,#181818,center);
+        font-weight: 400;
+        position: relative;
+        z-index: 9999;
+    }
+    .title{
+        position: absolute;
+        line-height: 1rem;
+        text-align: center;
+        width: 100%;
+        left: 0;
+        z-index: 2;
+    }
+    .nav-left{
+        @include wh(.36rem,1rem);
+        background: url('../image/nav-left.png') no-repeat;
+        background-size: 100%;
+        background-position: center;
+        float: left;
+        margin-left: .16rem;
+    }
+    .search{
+        @include wh(.3rem,1rem);
+        background: url('../image/search-icon.png') no-repeat;
+        background-size: 100%;
+        background-position: center;
+        float: right;
+        margin-right: .44rem;
+    }
+    .edit{
+        float: right;
+        margin-right: .44rem;
+        font-weight: 400;
+        @include fct(.3rem,#181818,center);
+        @include hl(1rem);
+    }
+
+}
+.mask{
+    @include wh(100%,100%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background:rgba(0,0,0,.6);
+    z-index: 99999;
+}
+.header-search{
+    @include wh(100%,1rem);
+    padding: .15rem 0;
+    box-sizing: border-box;
+    display: flex;
+    position: fixed;
+    top: 0;
+    background: #fff;
+    z-index: 100000;
+    input{
+        flex: 1;
+        margin-left: .32rem;
+        background: url('../image/search-icon.png') no-repeat;
+        background-size: .3rem;
+        background-position: .25rem center;
+        border:none;
+        padding-left: .7rem;
+        background-color:rgba(245,245,245,1);
+        border-radius:.04rem;
+        @include fc(.28rem,#181818);
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+    }
+    input::-webkit-input-placeholder{
+        color:#999999;
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+    }
+    input::placeholder{
+        color:#999999;
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+    }
+    .cancel{
+        @include fc(.32rem,#5E86F7);
+        display: block;
+        font-weight:400;
+        padding:0 .32rem;
+        line-height: .7rem;
+    }
+}
