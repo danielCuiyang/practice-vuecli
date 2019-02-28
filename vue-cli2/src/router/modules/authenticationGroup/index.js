@@ -29,6 +29,14 @@ const authTypeRouter = {
       //showEdit 控制是否显示编辑二字
       meta: { title: '个人认证',showSearch:false,showEdit:false} 
     },
+    {
+      path: 'authSuccess',
+      component: () => import('@/views/authenticationGroup/authSuccess'),
+      name: 'authSuccess',
+      //showSearch 控制是否显示头部搜索ICON
+      //showEdit 控制是否显示编辑二字
+      meta: { title: '提交认证',showSearch:false,showEdit:false} 
+    }
   ]
 }
 

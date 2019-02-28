@@ -35,7 +35,7 @@ html,body,#app,.layout{
                 font-weight: 400;
             }
             .certifyType{
-                @include whl(.99rem,.45rem,.45rem);
+                @include whl(1.2rem,.45rem,.45rem);
                 border-radius: .23rem;
                 border:1px solid #72CF5F;
                 @include fc(.22rem,#43C02A);
@@ -44,7 +44,7 @@ html,body,#app,.layout{
                 margin-right: .4rem;
             }
             .certifyTypeNo{
-                @include whl(.99rem,.45rem,.45rem);
+                @include whl(1.2rem,.45rem,.45rem);
                 border-radius: .23rem;
                 border:1px solid rgba(210,210,210,1);
                 @include fc(.22rem,#D2D2D2);

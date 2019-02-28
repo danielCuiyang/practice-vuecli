@@ -1,9 +1,6 @@
-/*
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
-import store from '../store'
-import { getToken } from '@/utils/auth'
 import qs from 'qs'
+// import { getToken } from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
@@ -14,14 +11,13 @@ const service = axios.create({
 service.defaults.transformRequest = function (data) {
   data = qs.stringify(data)
   return data
-}
+};
 
- request拦截器
+var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiMSIsImRldmljZV9pZCI6IjEiLCJkYXRlIjoxNTUxMjQwMDI4fQ.l-HC8oQu7C_GkjXX4lQ_cFDIC02UMWE8IcgU3ryRQ1M31lmTa5RsC6_0OxS3Sa2us5XdvKl9xbUavlZvh3FJk1153V7XvIyR4XTPW_xUpiwaOGohb2AQSxOUVwIkPoaffOQFSOfGWWgnb1OOFGqTn4gm9sEkhiotgRrXg3q6v6Q"
+// // request拦截器
 service.interceptors.request.use(
   config => {
-    if (store.getters.token) {
-      config.headers.Authorization = getToken()
-    }
+    config.headers.Authorization = token;
     return config
   },
   error => {
@@ -34,28 +30,16 @@ service.interceptors.request.use(
 // response 拦截器
 service.interceptors.response.use(
   response => {
-    // code为非200是抛错
-    const res = response.data
-    if (res.code != 200) {
-      Message({
-        message: res.message,
-        type: 'error',
-        duration: 5 * 1000
-      })
-      if (res.code === 21314 || res.code === 21315 || res.code === 21316 || res.code === 21317) {
-        MessageBox.confirm(
-          '你已被登出，可以取消继续留在该页面，或者重新登录',
-          '确定登出',
-          {
-            confirmButtonText: '重新登录',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }
-        ).then(() => {
-          store.dispatch('FedLogOut').then(() => {
-            location.reload() // 为了重新实例化vue-router对象 避免bug
-          })
-        })
+    /**
+     * code为非200是抛错
+     */
+    const res = response.data;
+    if (res.errorCode !== 200) {
+      if (res.errorCode == '24004'||res.errorCode=='24005'){
+        return response.data
+      }
+      if (res.errorCode === 21314 || res.errorCode === 21315 || res.errorCode === 21316 || res.errorCode === 21317) {
+        console.log('报错')
       }
       return Promise.reject('error')
     } else {
@@ -64,14 +48,8 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
     return Promise.reject(error)
   }
 )
 
 export default service
-**/

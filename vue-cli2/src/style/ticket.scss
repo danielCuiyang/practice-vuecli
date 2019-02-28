@@ -1,0 +1,157 @@
+@import "./base.scss";
+html,body,#app,.layout{
+    height: 100%;
+}
+.ticket{ 
+    .section{
+        padding:0 .4rem;
+        &-header{
+            @include clear;
+            .personal{
+                @include clear;
+                @include whl(100%,1rem,1rem);
+                position: relative;
+                float: left;
+                width: 50%;
+                box-sizing: border-box;
+                .people{
+                    padding-left: .6rem;
+                    @include fc(.3rem,#3b3b3b);
+                    display: block;
+                    line-height: 1rem;
+                }
+            }
+        }
+        ul{
+            li{
+                @include hl(1rem);
+                border-bottom: 1px solid #f5f5f5;
+                .symbol{
+                    @include fc(.3rem,#e33735);
+                }
+                .left{
+                    width: 1.44rem;
+                    display: inline-block;
+                }
+                .title{
+                    @include fc(.3rem,#3b3b3b);
+                    font-weight: 400;
+                }
+                .msg{
+                    @include fc(.3rem,#6c6c6c);
+                    font-weight: 400; 
+                    padding-left: .65rem;
+                    border:none;
+                }
+                input::placeholder{
+                    @include fc(.3rem,#c6c6c6);
+                }
+                textarea::placeholder{
+                    @include fc(.3rem,#c6c6c6);
+                }
+                .link{
+                    float: right;
+                    @include wh(.24rem,100%);
+                    background: url('../image/link.png')no-repeat;
+                    background-position: center;
+                    background-size: .24rem .24rem;
+                    margin-left: .3rem;
+                }
+            }
+            .remark{
+                height:auto;
+                border:none;
+                line-height: normal;
+                .left{
+                    display: block;
+                    width:100%;
+                    padding-top: .3rem;
+                }
+                .msg{
+                    padding:0;
+                    width: 100%;
+                    padding-top: .3rem;
+                    height: .7rem;
+                    line-height: .42rem;
+                }
+            }
+        }   
+    }
+    input[type="radio"]{
+        display: none;
+    }
+    label:before{
+          content: '';
+          display: inline-block;
+          position: absolute;
+          width: .4rem;
+          height: .4rem;
+          top: 50%;
+          line-height:1rem;
+          margin-top: -.2rem;     
+          background: url(../image/circle.png) no-repeat;
+          background-size: 0.4rem 0.4rem;
+      }
+    input[type='radio']:checked+label:before{
+        background-image: url('../image/selected.png');
+        background-position: center center;
+      }
+    label{
+        position: absolute;
+        width: .4rem;
+        height: .4rem;
+        top: 50%;
+        line-height: 1rem;
+        margin-top: -.2rem;     
+    }
+    button{
+        @include whl(7.02rem,.88rem,.88rem);
+        margin: auto;
+        display: block;
+        border:none;
+        background-image: linear-gradient(90deg, 
+            #fa5654 0%, 
+            #e33735 100%), 
+        linear-gradient(
+            #e33735, 
+            #e33735);
+        background-blend-mode: normal, 
+            normal;
+        border-radius: 0.08rem;
+        @include fct(.3rem,#fff,center);
+        margin-top: .2rem;
+    }
+    .mask{
+        @include wh(100%,100%);
+        background: rgba(0,0,0,.8);
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        z-index: 88888;
+    }
+    .select-popup{
+        position: fixed;
+        bottom: 0;
+        z-index: 99999;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #f2f2f2;
+        box-sizing: border-box;
+        background: #fff;
+        .select-ticket{
+            div{
+                @include hl(1.1rem);
+                @include fc(.3rem,#6c6c6c);
+            }
+            .active{
+                color:#fa5654;
+                background: url('../image/select-right.jpg')no-repeat;
+                background-position: 5rem center;
+                background-size: .3rem .22rem;
+            }
+            .cancel{
+                border-top:.2rem solid #f5f5f5;
+            }
+            }
+        }
+    }

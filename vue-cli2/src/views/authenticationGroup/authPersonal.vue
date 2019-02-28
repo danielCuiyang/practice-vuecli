@@ -33,6 +33,7 @@
 
 <script>
 import '@/style/authenticationGroup/authPersonal.scss'
+import {upload,authPC} from '@/api/auth'
 import Headers from '@/components/Header'
 import { setTimeout } from 'timers';
 export default {
@@ -42,15 +43,21 @@ export default {
     data(){
         return{
             formData:new FormData(),
+            formDatas:new FormData(),
             idCardBack:{},
             idCardFace:{},
             faceFile:"",
             backFile:"",
             userMsg:{
                 idcard:"",
-                name:""
+                name:"",
+                idCardFaceId:"",
+                idCardBackId:"",
             }
         }
+    },
+    created(){
+
     },
     methods: {
       addFaceImg(event){
@@ -58,29 +65,24 @@ export default {
         // 通过DOM取文件数据
         this.faceFile = inputDOM.files;
         let size  =  Math.floor(this.faceFile[0].size / 1024);
-        console.log(size)
-          if (size > 5*1024*1024) {
-            alert('请选择5M以内的图片！');
-            return false
-          }
+          // if (size > 5*1024*1024) {
+          //   alert('请选择5M以内的图片！');
+          //   return false
+          // }
           this.$set(this.idCardFace,"img",this.faceFile[0]);
-          console.log(this.idCardFace,"imgs")
+          this.formData.append('file',this.idCardFace['img']);
+          this.uploadImg(this.formData,1)
       },
       addBackImg(event){
         let inputDOM = this.$refs.inputer2;
         // 通过DOM取文件数据
         this.backFile = inputDOM.files;
         let size  =  Math.floor(this.backFile[0].size / 1024);
-        console.log(size)
-          if (size > 5*1024*1024) {
-            alert('请选择5M以内的图片！');
-            return false
-          }
           this.$set(this.idCardBack,"img",this.backFile[0]);
-          console.log(this.idCardBack,"imgs")
+          this.formDatas.append('file',this.idCardBack['img']);
+          this.uploadImg(this.formDatas,2)
       },
       getObjectURL(file) {
-          console.log(file,"file")
         var url = null ;
         if (window.createObjectURL!=undefined) { // basic
           url = window.createObjectURL(file) ;
@@ -91,16 +93,43 @@ export default {
         }
         return url ;
       },
+      uploadImg(formData,id){
+        upload(formData).then((res)=>{
+            if(id==1){
+              this.userMsg.idCardFaceId =res.data.id
+            }else{
+                this.userMsg.idCardBackId =res.data.id
+            }
+        })
+      },
+      validResult(){
+        if(!this.userMsg.idCardFaceId){
+          return {code:"error",msg:"请上传身份证人像面"}
+        }
+        else if(!this.userMsg.idCardBackId){
+          return {code:"error",msg:"请上传身份证国徽面"}
+        }
+        else if(!this.userMsg.name){
+          return {code:"error",msg:"请填写姓名"}
+        }
+        else if(!this.userMsg.idCard){
+          return {code:"error",msg:"请填写身份证号"}
+        }
+        else{
+          return {code:"success"}
+        }
+      },
       submit(){
-          console.log(this.userMsg)
-        this.formData.append('upfile',this.idCardFace['img'],"img");
-        console.log(this.formData.get("upfile"),"formData")
-        return
-        this.$http.post('/opinion/feedback', this.formData,{
-          headers: {'Content-Type': 'multipart/form-data'}
-        }).then(res => {
-          this.alertShow=true;
-        });
+         var validRes = this.validResult()
+         if(validRes.code == 'error'){
+            alert(validRes.msg)
+            return
+         }
+         var imgsId = this.userMsg.idCardFaceId + ',' + this.userMsg.idCardBackId
+        authPC(imgsId,1).then((res)=>{
+          console.log(res,"res")
+        })
+        console.log(this.userMsg)
       },
     }
 }

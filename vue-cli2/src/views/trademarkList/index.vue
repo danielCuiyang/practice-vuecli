@@ -1,5 +1,6 @@
 <template>
     <div>
+       <Headers @searchContent="getSearchContent"></Headers>
        <div class="navlist">
           <ul>
             <li class="active">全部</li>
@@ -10,7 +11,7 @@
             <li>已到期</li>
           </ul>
        </div>
-       <scroller :on-infinite="infinite" style="top:1.1rem"  snappingHeight="60" ref="my_scroller" >
+       <scroller :on-infinite="infinite" style="top:2.1rem"  snappingHeight="60" ref="my_scroller" >
          <ul class="trademarkList">
            <li>
               <div class="trademarkImg">
@@ -94,16 +95,25 @@
     </div>
 </template>
 
+
 <script>
+   import Headers from '@/components/Header'
     export default {
       methods: {
         infinite() {
           console.log("下拉");
         },
-      }
+        getSearchContent(){
+
+        }
+      },
+      components:{
+        Headers
+      },
     }
 </script>
 
 <style lang="scss" scoped>
-  @import "../../style/trademarkList.scss"
+  @import "../../style/trademarkList.scss";
+
 </style>

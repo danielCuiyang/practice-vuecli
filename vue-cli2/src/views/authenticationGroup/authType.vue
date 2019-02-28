@@ -23,6 +23,12 @@ import Headers from '@/components/Header'
 export default {
     components:{
         Headers
+    },
+    created(){
+    },
+    methods:{
+        toast(){
+        }
     }
 }
 </script>

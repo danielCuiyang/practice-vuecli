@@ -1,0 +1,87 @@
+@import "../base.scss";
+html,body,#app,.layout,.agreement{
+    height: 100%;
+}
+.agreement {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    .section{
+        flex: 1;
+        padding:.3rem .24rem 0 .24rem;
+        overflow-y: scroll;
+        p{
+            @include fc(.22rem,#6c6c6c);
+            line-height:.36rem;
+            margin-bottom: 0.3rem;
+        }
+    }
+    .bottom{
+        @include hl(1rem);
+        border-top:1px solid rgba(245,245,245,1);
+        box-sizing: border-box;
+        position: relative;
+        .right{
+            float: right;
+            @include fct(.3rem,#fff,center);
+            @include whl(3.14rem,1rem,1rem);
+            font-family:PingFangSC-Regular;
+            font-weight:400;
+            background:linear-gradient(270deg,rgba(227,55,53,1) 0%,rgba(250,86,84,1) 100%);
+            
+        }
+        .left{
+            float: left;
+            @include whl(4.36rem,1rem,1rem);
+            padding-left: .85rem;
+            box-sizing: border-box;
+            span{
+                @include fc(.22rem,#75a6ea);
+            }
+            .all{
+                padding-right: .1rem;
+            }
+            input[type="checkbox"]{
+                display: none;
+            }
+           label:before{
+                  content: '';
+                  display: inline-block;
+                  position: absolute;
+                  width: .4rem;
+                  height: .4rem;
+                  top: 50%;
+                  line-height: .9rem;
+                  margin-top: -.2rem;     
+                  background: url(../../image/circle.png) no-repeat;
+                  background-size: 0.4rem 0.4rem;
+              }
+            input[type='checkbox']:checked+label:before{
+                background-image: url('../../image/default-selected.png');
+                background-position: center center;
+              }
+              label{
+                position: absolute;
+                width: .4rem;
+                height: .4rem;
+                left: .24rem;
+                top: 50%;
+                line-height: .9rem;
+                margin-top: -.2rem;     
+            }
+        }
+    }
+    .subBottom{
+        @include hl(0.9rem);
+        background-color: #fff2f2;
+        @include fct(.24rem,#fa5654,center);
+    }  
+    .toast{
+        @include whl(1.9rem,.8rem,.8rem);
+        background:rgba(0,0,0,.8);
+        border-radius: 0.08rem;
+        @include trbl;
+        @include fct(.28rem,#fff,center);
+    }
+}

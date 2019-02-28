@@ -1,0 +1,171 @@
+@import "../base.scss";
+html,body,#app,.layout,.faithPartner{
+    height: 100%;
+}
+.faithPartner{
+    .banner{
+        @include whl(100%,4.7rem,4.7rem);
+        background: url('../../image/faith-banner.png')no-repeat;
+        background-size: 100%;
+        position: relative;
+        .header{
+            background: transparent;
+            border:none;
+            .nav-left{
+                background: url('../../image/nav-link.png')no-repeat;
+                background-size:100%;
+                background-position: center;
+            }
+            .title{
+                color:#fff;
+            }
+        }
+        .tip{
+            height: .74rem;
+            width: 100%;
+            background: url('../../image/faith-tip.jpg')no-repeat;
+            background-size: 100%;
+            span{
+                @include wh(.3rem,100%);
+                float: right;
+                background: url('../../image/close.png')no-repeat;
+                background-size: 100%;  
+                background-position: center;
+                margin-right: .3rem;      
+            }
+        }
+        .price{
+            margin:.81rem 0 0 .6rem;
+            @include fc(.6rem,#fff);
+            line-height: .6rem;
+            font-family: PingFang-SC-Heavy;
+        }
+        .active{
+            margin:1.55rem 0 0 .6rem;
+        }
+        .balance{
+            margin:0rem 0 0 .6rem; 
+            @include fc(.28rem,#fff);
+            font-family: PingFang-SC-Medium;
+        }
+        img{
+            display: block;
+            @include wh(1.58rem,2rem);
+            position: absolute;
+            bottom:.4rem;
+            right:1.05rem;
+        }
+    }
+    .grid{
+        padding:.6rem .3rem 0.24rem ;
+        &-title{
+            text-align: center;
+            height: .4rem;
+            line-height:.4rem;   
+            span{
+                @include fc(.32rem,#181818);
+                display: inline-block;
+                line-height: .4rem;
+                font-weight: 400;
+                background: url('../../image/faith-star.png')no-repeat;
+                background-size: .36rem .36rem;
+                background-position:.5rem center;
+                &::before{
+                    content:'';
+                    width: .37rem;
+                    height: 1px;
+                    margin-right: .56rem;
+                    background: #6c6c6c;
+                    float: left;
+                    margin-top: .2rem;
+                }
+                &::after{
+                    content:'';
+                    width: .37rem;
+                    height: 1px;
+                    margin-left: .1rem;
+                    background: #6c6c6c;
+                    float: right;
+                    margin-top: .2rem;
+                }
+            }
+        }
+        ul{
+            @include clear;
+            padding-top: .6rem;
+            li{
+                @include whl(25%,1.05rem,1.05rem);
+                display: flex;
+                float: left;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                img{
+                    width: .75rem;
+                    height: .74rem;
+                }
+                span{
+                    margin-top: .1rem;
+                    @include fc(.2rem,#6c6c6c);
+                }
+            }
+        }
+        .explain{
+            @include fc(.22rem,#6c6c6c);
+            line-height: .4rem;
+            padding:.4rem .4rem;
+            box-sizing: border-box;
+            background-color: #f3f5f9;
+            border-radius: .12rem;
+            margin-top: .4rem;
+        }
+        &-title2{
+            margin-top: .4rem;
+            span{
+                background: url('../../image/faith-warn.png')no-repeat;
+                background-size: .36rem .36rem;
+                background-position:.5rem center;
+            }
+        }
+        &-title3{
+            margin-top: .4rem;
+            span{
+                background: url('../../image/faith-save.png')no-repeat;
+                background-size: .36rem .36rem;
+                background-position:.5rem center;
+            }
+        }
+        .bg-ye{
+            background-image: linear-gradient(155deg, 
+            #fbc46a 0%, 
+            #e8b055 100%), 
+        linear-gradient(
+            #efbb67, 
+            #efbb67);
+        background-blend-mode: normal, 
+            normal;
+        }
+        .bg{
+            background-image: linear-gradient(155deg, 
+            #86c3e1 0%, 
+            #7ab5d1 100%), 
+            linear-gradient(
+            #89bfd9, 
+            #89bfd9);
+            background-blend-mode: normal, 
+            normal;
+            margin-top: .2rem;
+        }
+        .bg3{
+            background-image: linear-gradient(155deg, 
+            #f6a9ab 0%, 
+            #f09a9c 50%, 
+            #ea8a8c 100%), 
+        linear-gradient(
+            #f6a9ab, 
+            #f6a9ab);
+        background-blend-mode: normal, 
+            normal;
+        }
+    }
+}

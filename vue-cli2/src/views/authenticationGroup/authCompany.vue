@@ -20,7 +20,7 @@
         <div class="ticket-tip" v-show="!showTicketSub">
 
         </div>
-        <button class="submit">
+        <button class="submit" @click="submit">
             提交
         </button>
     </div>
@@ -29,6 +29,7 @@
 
 <script>
 import '@/style/authenticationGroup/authCompany.scss'
+import {upload,authPC} from '@/api/auth'
 import Headers from '@/components/Header'
 import Switchs from '@/components/Switch'
 export default {
@@ -43,7 +44,8 @@ export default {
             },
             fil:"",
             showTicketSub:true,
-            company:"上海尚标互联网科技有限公司"
+            imgId:"",
+            company:"11"
         }
     },
 methods: {
@@ -52,16 +54,15 @@ methods: {
         // 通过DOM取文件数据
         this.fil = inputDOM.files;
         let size  =  Math.floor(this.fil[0].size / 1024);
-        console.log(size)
-          if (size > 5*1024*1024) {
-            alert('请选择5M以内的图片！');
-            return false
-          }
+          // if (size > 5*1024*1024) {
+          //   alert('请选择5M以内的图片！');
+          //   return false
+          // }
           this.$set(this.imgs,"img",this.fil[0]);
-          console.log(this.imgs,"imgs")
+          this.formData.append('file',this.imgs['img']);
+          this.uploadImg(this.formData)
       },
       getObjectURL(file) {
-          console.log(file,"file")
         var url = null ;
         if (window.createObjectURL!=undefined) { // basic
           url = window.createObjectURL(file) ;
@@ -72,17 +73,31 @@ methods: {
         }
         return url ;
       },
-      submit(){
-        for(let key in this.imgs){
-          let name=key.split('?')[0];
-          this.formData.append('multipartFiles',this.imgs[key],name);
-        }
-        this.$http.post('/opinion/feedback', this.formData,{
-          headers: {'Content-Type': 'multipart/form-data'}
-        }).then(res => {
-          this.alertShow=true;
-        });
+      uploadImg(formData,id){
+          upload(formData).then((res)=>{
+            this.imgId = res.data.id
+          })
       },
+      validDate(){
+        if(this.showTicketSub&&!this.company){
+           return {code:"error",msg:"请选择开票主体"}
+        }
+        if(!this.imgId){
+          console.log(123)
+          return {code:"error",msg:"请上传营业执照"}
+        }
+        return{code:"success"}
+      },
+      submit(){
+        var validRes = this.validDate()
+        if(validRes.code == 'error'){
+          alert(validRes.msg)
+          return
+        }
+          authPC(this.imgId,2).then((res)=>{
+                console.log(res,"res")
+          })
+        }
     }
 }
 </script>

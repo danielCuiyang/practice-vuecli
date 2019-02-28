@@ -1,5 +1,6 @@
 <template>
   <div class="details">
+    <Headers></Headers>
     <div class="trademarkImg">
       <img src="http://pic.86sb.com/uploads/Brand_sb/2680307633.jpg?11&x-oss-process=image/resize,w_410,h_310" alt="">
     </div>
@@ -19,8 +20,11 @@
 </template>
 
 <script>
+  import Headers from '@/components/Header'
     export default {
-        name: ""
+      components:{
+        Headers
+      },
     }
 </script>
 

@@ -47,6 +47,9 @@
     }
 
 }
+.showBorder{
+    border:none
+}
 .mask{
     @include wh(100%,100%);
     position: fixed;
@@ -66,6 +69,13 @@
     top: 0;
     background: #fff;
     z-index: 100000;
+    .nav-left{
+        width: .36rem;
+        background: url('../image/nav-left.png') no-repeat;
+        background-size: 100%;
+        background-position: center;
+        margin-left: .16rem;
+    }
     input{
         flex: 1;
         margin-left: .32rem;
