@@ -5,14 +5,18 @@ import App from './App'
 import router from './router'
 import '@/style/base.scss' // global css
 import VueScroller from "vue-scroller"
+import Toast from '@/utils/plugins'
+import '@/utils/rem.js'
 
+Vue.use(Toast)
 Vue.use(VueScroller);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+var vm = new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
 })
+export {vm}

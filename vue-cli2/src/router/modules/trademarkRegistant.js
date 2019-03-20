@@ -10,6 +10,7 @@ const trademarkRegistantRouter = {
       component: () => import('@/views/trademarkRegistant/index'),
       name: 'trademarkRegistant',
       //showSearch 控制是否显示头部搜索ICON
+      //showEdit 控制是否显示编辑二字
       meta: { title: '选择商标注册人',showSearch:true} 
     },
   ]

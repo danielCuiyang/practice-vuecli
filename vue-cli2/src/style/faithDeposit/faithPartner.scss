@@ -94,7 +94,7 @@ html,body,#app,.layout,.faithPartner{
             @include clear;
             padding-top: .6rem;
             li{
-                @include whl(25%,1.05rem,1.05rem);
+                @include whl(23%,1.05rem,1.05rem);
                 display: flex;
                 float: left;
                 flex-direction: column;
@@ -108,6 +108,9 @@ html,body,#app,.layout,.faithPartner{
                     margin-top: .1rem;
                     @include fc(.2rem,#6c6c6c);
                 }
+            }
+            li:nth-child(2){
+                width: 30%;
             }
         }
         .explain{

@@ -6,6 +6,12 @@ export function faith() {
     method: 'get',
   })
 }
+export function bondsAdd() {
+  return request({
+    url: '/bonds/add',
+    method: 'post',
+  })
+}
 
 export function agreement(){
   return request({

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  //  import { informations } from '@/api/issue'
+   import { informations } from '@/api/issue'
     export default {
       created() {
         informations(2).then(res => {

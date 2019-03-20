@@ -8,7 +8,7 @@ const mergeOptions = function ($vm, options) {
     }
   }
   const _options = objectAssign({}, defaults, options)
-  console.log(_options,"_options")
+  // console.log(_options,"_options")
   for (let i in _options) {
     $vm[i] = _options[i]
   }

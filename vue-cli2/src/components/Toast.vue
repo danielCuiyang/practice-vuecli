@@ -44,7 +44,6 @@ export default {
     }
   },
   created () {
-      console.log(this.text,"text")
     if (this.value) {
       this.show = true
     }

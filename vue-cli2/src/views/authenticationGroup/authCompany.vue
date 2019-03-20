@@ -1,14 +1,14 @@
 <template>
     <div class="authCompany">
-        <Headers></Headers>
+        <Headers  @goBack="$router.go(-1)"></Headers>
         <div class="image">
             <img v-for='(value, key) in imgs'  :src="getObjectURL(value)">
             <input type='file' id="file" @change="addImg" ref="inputer"
-             accept="image/png,image/jpeg,image/gif,image/jpg"/>
+             accept="image/png,image/jpeg,image/gif,image/jpg,image/*"/>
             <label for="file"></label>
         </div>
         <p>上传盖有公章的营业执照</p>
-        <div class="ifTicket">
+        <!-- <div class="ifTicket">
           是否能开具发票
           <Switchs class="switchs" v-model="showTicketSub"></Switchs>
         </div>
@@ -19,8 +19,8 @@
         </div>
         <div class="ticket-tip" v-show="!showTicketSub">
 
-        </div>
-        <button class="submit" @click="submit">
+        </div> -->
+        <button :disabled="disabled" :class="{ active: disabled }" class="submit" @click="submit">
             提交
         </button>
     </div>
@@ -42,9 +42,11 @@ export default {
            formData:new FormData(),
             imgs:{
             },
+            registrant_hash:this.$route.params.registrant_hash,
             fil:"",
             showTicketSub:true,
             imgId:"",
+            disabled:false,
             company:"11"
         }
     },
@@ -73,17 +75,16 @@ methods: {
         }
         return url ;
       },
-      uploadImg(formData,id){
-          upload(formData).then((res)=>{
+      uploadImg(formData){
+          upload(formData,3).then((res)=>{
             this.imgId = res.data.id
           })
       },
       validDate(){
-        if(this.showTicketSub&&!this.company){
-           return {code:"error",msg:"请选择开票主体"}
-        }
+        // if(this.showTicketSub&&!this.company){
+        //    return {code:"error",msg:"请选择开票主体"}
+        // }
         if(!this.imgId){
-          console.log(123)
           return {code:"error",msg:"请上传营业执照"}
         }
         return{code:"success"}
@@ -91,11 +92,16 @@ methods: {
       submit(){
         var validRes = this.validDate()
         if(validRes.code == 'error'){
-          alert(validRes.msg)
+          this.$toast.text(validRes.msg)
           return
         }
-          authPC(this.imgId,2).then((res)=>{
-                console.log(res,"res")
+        authPC(this.imgId,2,this.registrant_hash).then((res)=>{
+              this.disabled = true
+            //  if(res.data[0].result == 200){
+              this.$router.push({path:"/authSuccess"})
+            //  }
+          }).catch(err=>{
+            this.disabled = false
           })
         }
     }

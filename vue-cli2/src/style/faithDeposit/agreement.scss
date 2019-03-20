@@ -2,6 +2,9 @@
 html,body,#app,.layout,.agreement{
     height: 100%;
 }
+.layout{
+    padding: 0;
+}
 .agreement {
     display: flex;
     width: 100%;
@@ -25,7 +28,7 @@ html,body,#app,.layout,.agreement{
         .right{
             float: right;
             @include fct(.3rem,#fff,center);
-            @include whl(3.14rem,1rem,1rem);
+            @include whl(35%,1rem,1rem);
             font-family:PingFangSC-Regular;
             font-weight:400;
             background:linear-gradient(270deg,rgba(227,55,53,1) 0%,rgba(250,86,84,1) 100%);
@@ -33,7 +36,7 @@ html,body,#app,.layout,.agreement{
         }
         .left{
             float: left;
-            @include whl(4.36rem,1rem,1rem);
+            @include whl(65%,1rem,1rem);
             padding-left: .85rem;
             box-sizing: border-box;
             span{

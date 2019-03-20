@@ -43,17 +43,18 @@ export default {
     methods:{
         // 点击取消
         cancelSearch(){
-            this.showSearchBox =true
+            this.showSearchBox =false
             this.showMask = false
-            this.cancel = false
+            this.cancel = true
         },
         goBack(){
-            this.$router.go('-1');
+            this.$emit("goBack")
         },
         // 点击搜索按钮icon
         searchIcon(){
             this.showMask = true
             this.showSearchBox=true
+            this.$emit("seachIcon",0)
         },
         // 搜索头部左侧返回icon 
         searchAll(){
@@ -81,11 +82,14 @@ export default {
     directives: {
         focus: {
             // 指令的定义
-            inserted: function (el) {
-            el.focus()
+            // inserted: function (el) {
+            //     el.focus()
+            //  },
+            update(el){
+                el.focus()
+            }
         }
     }
-}
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div class="faithPartner">
        <div class="banner">
-           <Headers></Headers>
+           <Headers @goBack="goBack"></Headers>
            <div class="tip" v-show='showTip'>
                 <span @click="showTip = false"></span>
            </div>
@@ -91,7 +91,7 @@ export default {
     data(){
         return{
             showTip:true,
-            faithPrice:3000.00
+            faithPrice:''
         }
     },
     created(){

@@ -65,7 +65,7 @@
     padding: .15rem 0;
     box-sizing: border-box;
     display: flex;
-    position: fixed;
+    position: relative;
     top: 0;
     background: #fff;
     z-index: 100000;
@@ -83,22 +83,27 @@
         background-size: .3rem;
         background-position: .25rem center;
         border:none;
+        height: .32rem;
+        padding: .19rem 0;
         padding-left: .7rem;
         background-color:rgba(245,245,245,1);
         border-radius:.04rem;
         @include fc(.28rem,#181818);
         font-family:PingFangSC-Regular;
         font-weight:400;
+        vertical-align: middle;
     }
     input::-webkit-input-placeholder{
         color:#999999;
         font-family:PingFangSC-Regular;
         font-weight:400;
+        vertical-align: middle;
     }
     input::placeholder{
         color:#999999;
         font-family:PingFangSC-Regular;
         font-weight:400;
+        vertical-align: middle;
     }
     .cancel{
         @include fc(.32rem,#5E86F7);

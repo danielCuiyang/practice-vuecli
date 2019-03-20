@@ -1,11 +1,7 @@
 <template>
-    <div class="trademark-registant">
-            <Headers @searchContent="getSearchContent" ></Headers>
-            <scroller
-                class="scroller" 
-                :on-infinite="infinite"
-                ref="scroller"
-                >
+<div class="trademark-registant">
+    <Headers @searchContent="getSearchContent" ></Headers>       
+    <scroller class="scroller" :on-infinite="infinite" style="top:1.1rem"  snappingHeight="60" ref="scroller" >
                 <div v-for="(item,index) in trademarkList"   class="list">
                     <div class="top">
                         <span v-if="item.audit_status=='1'">
@@ -36,19 +32,19 @@
                 </div>
                 <div style="height:100px">
                 </div>
-            </scroller>
-            <div class="bottom" v-if="totalCount > 0">
-                <div class="left">
-                    <span>
-                        <input type="checkbox" v-model="ischeckAll" id="all" >
-                        <label for="all"></label>
-                    </span>
-                    <span class="all">全选</span>
-                    <span>共<span class="fc">{{totalCount}}</span>个商品</span>
-                </div>
-                <div  class="right"  @click="nextStep">下一步</div>
+       </scroller>
+       <div class="bottom" v-if="totalCount > 0">
+            <div class="left">
+                <span>
+                    <input type="checkbox" v-model="ischeckAll" id="all" >
+                    <label for="all"></label>
+                </span>
+                <span class="all">全选</span>
+                <span>共<span class="fc">{{totalCount}}</span>个商品</span>
             </div>
-    </div>
+            <div  class="right"  @click="nextStep">下一步</div>
+        </div>
+</div>
 </template>
 <script>
 import '@/style/trademark-registant.scss'
@@ -63,131 +59,10 @@ export default {
     data(){
         return{
             certifyType:'certifyType',
-            list:[
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                    registrant_hash:"175629"
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                    registrant_hash:"175629"
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"3",
-                    num:"987",
-                     registrant_hash:"175629"
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"0",
-                    num:"987",
-                    registrant_hash:"175629"
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"1",
-                    num:"987",
-                },
-                {   
-                    company_name:"腾讯科技有限公司",
-                    audit_status:"2",
-                    num:"987",
-                },
-            ],
             trademarkList:[],
             page:1,
             regname:"",
-            canPull:false,
+            initScroll:false,
             emptyData:false //主要用来判断数据为空 拉倒顶部又拉到底部 重新触发infinite事件不显示没有更多数据的问题
         }
     },
@@ -196,19 +71,18 @@ export default {
     },
     computed:{
         totalCount(){
-            let totalArr = this.list.filter(item=>item.checked)
+            let totalArr = this.trademarkList.filter(item=>item.checked)
             return totalArr.length
         },
         ischeckAll:{
             get(){
-                var list = this.list.filter((item)=>{
+                var list = this.trademarkList.filter((item)=>{
                     return item.audit_status=='1'
                 })
-                console.log(list)
                 return list.every(item=>item.checked)
             },
             set(newValue){
-                this.list.filter((item)=>{
+                this.trademarkList.filter((item)=>{
                     return item.audit_status=='1'
                 }).forEach(item=>{
                     item.checked=newValue
@@ -232,22 +106,171 @@ export default {
     },
     methods:{
         getTrademarkList(regname,page){ 
-            getTrdList(regname,page).then((res)=>{
+            let res  ={
+                    "data":[
+                        {
+                            "user_id":"1",
+                            "audit_status":3,
+                            "created_at":1550806709,
+                            "updated_at":0,
+                            "registrant_hash":75247,
+                            "origin_company_name":"深圳市鹏涛兴业科技有限公司",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"深圳市鹏涛兴业科技有限公司",
+                            "origin_address":"广东省深圳市宝安区新安街道宝民一路96号白金酒店大厦31楼3114",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"广东省深圳市宝安区新安街道宝民一路96号白金酒店大厦31楼3114"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":3,
+                            "created_at":1550806653,
+                            "updated_at":0,
+                            "registrant_hash":187326,
+                            "origin_company_name":"晋江市嘉利玩具精品有限公司",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"晋江市嘉利玩具精品有限公司",
+                            "origin_address":"福建晋江市安海镇桥头加工区5号",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"福建晋江市安海镇桥头加工区5号"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":1,
+                            "created_at":1550806653,
+                            "updated_at":0,
+                            "registrant_hash":187326,
+                            "origin_company_name":"晋江市嘉利玩具精品有限公司5",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"晋江市嘉利玩具精品有限公司",
+                            "origin_address":"福建晋江市安海镇桥头加工区5号",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"福建晋江市安海镇桥头加工区5号"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":1,
+                            "created_at":1550806653,
+                            "updated_at":0,
+                            "registrant_hash":187326,
+                            "origin_company_name":"晋江市嘉利玩具精品有限公司4",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"晋江市嘉利玩具精品有限公司",
+                            "origin_address":"福建晋江市安海镇桥头加工区5号",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"福建晋江市安海镇桥头加工区5号"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":1,
+                            "created_at":1550806653,
+                            "updated_at":0,
+                            "registrant_hash":187326,
+                            "origin_company_name":"晋江市嘉利玩具精品有限公司3",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"晋江市嘉利玩具精品有限公司3",
+                            "origin_address":"福建晋江市安海镇桥头加工区5号3",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"福建晋江市安海镇桥头加工区5号"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":1,
+                            "created_at":1550806653,
+                            "updated_at":0,
+                            "registrant_hash":187326,
+                            "origin_company_name":"晋江市嘉利玩具精品有限公司2",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"晋江市嘉利玩具精品有限公司",
+                            "origin_address":"福建晋江市安海镇桥头加工区5号",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"福建晋江市安海镇桥头加工区5号"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":1,
+                            "created_at":1550806653,
+                            "updated_at":0,
+                            "registrant_hash":187326,
+                            "origin_company_name":"晋江市嘉利玩具精品有限公司1",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"晋江市嘉利玩具精品有限公司",
+                            "origin_address":"福建晋江市安海镇桥头加工区5号",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"福建晋江市安海镇桥头加工区5号"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":3,
+                            "created_at":1550806653,
+                            "updated_at":0,
+                            "registrant_hash":196697,
+                            "origin_company_name":"北京金源盛海生物科技有限公司",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"北京金源盛海生物科技有限公司",
+                            "origin_address":"北京市朝阳区朝阳公园路6号院5号楼01层内L-VD1-1a、5#SA-56、L-BL2-07、L-BL2-09",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"北京市朝阳区朝阳公园路6号院5号楼01层内L-VD1-1a、5#SA-56、L-BL2-07、L-BL2-09"
+                        },
+                        {
+                            "user_id":"1",
+                            "audit_status":2,
+                            "created_at":1550750838,
+                            "updated_at":0,
+                            "registrant_hash":93705,
+                            "origin_company_name":"帝斯阁照明科技（深圳）有限公司",
+                            "origin_company_name_en":"",
+                            "company_name_en":"",
+                            "company_name":"帝斯阁照明科技（深圳）有限公司",
+                            "origin_address":"深圳市福田区沙头街道泰然九路海松大厦B座裙楼2楼202-77",
+                            "origin_address_en":"",
+                            "address_en":"",
+                            "address":"深圳市福田区沙头街道泰然九路海松大厦B座裙楼2楼202-77"
+                        }
+                    ],
+                    "total":4,
+                    "message":"",
+                    "errorCode":200
+                }
+            this.trademarkList = res.data
+            this.trademarkList.forEach(item=>{
+                this.$set(item,"checked",false)
+            })
+            return 
+            // axios 获取
+           getTrdList(regname,page).then((res)=>{
                 if(this.page == '1'){
                     this.trademarkList = res.data
                     this.trademarkList.forEach(item=>{
                         this.$set(item,"checked",false)
                     })
+                    this.initScroll = true
+                    this.$refs.scroller.finishInfinite()
                     if(this.trademarkList.length< 20){
-                        this.canPull = false
-                        return
+                        this.emptyData = true
+                        return 
                     }
                 }else{
+                    this.$refs.scroller.finishInfinite()
                     let resArr = res.data
                     if(resArr.length == 0){
-                        this.$refs.scroller.finishInfinite(true)
                         this.emptyData = true
-                        this.canPull = false
                         return
                     }
                     resArr.forEach(item=>{
@@ -255,14 +278,13 @@ export default {
                     })
                     this.trademarkList = [...this.trademarkList,...resArr]
                 }
-                this.canPull = true
             })
         },
         // 判断未认证的是否被别人认证过
         cetified(registrant_hash){
             tmCertified(registrant_hash).then((res)=>{
                 if(res.errorCode!='200'){
-                    alert('注册主体已被认证')
+                    this.$toast.text('注册主体已被认证')
                 }else{
                     this.$router.push({path:"/authType"})
                 }
@@ -273,28 +295,33 @@ export default {
                 this.$refs.scroller.finishInfinite(true)
                 return;
             }
-            if(!this.canPull){
-                done()
+            if(!this.initScroll){
+                // this.$refs.scroller.finishInfinite()
                 return
             }
-            this.canPull = false
+            console.log("ajsx")
             this.page++;
-            this.getTrademarkList(this.regname,this.page)
+            this.getTrademarkList(this.regname,this.page,done)
         },
         getSearchContent(val){
-            this.canPull = false
+            this.initScroll = false
+            this.emptyData = false
             this.page = 1
             this.regname = val
             this.getTrademarkList(this.regname,this.page)
-            console.log(val)
         },
         nextStep(){
            let trademarkArr=this.trademarkList.filter(item=>item.checked)
-            console.log(trademarkArr)
-            this.$router.push('/selectBrand');
+            let registrant_hash =  []
+            trademarkArr.forEach((item)=>{
+                    registrant_hash.push(item.registrant_hash)
+            })
+            let registrantHash = registrant_hash.join(",")
+            console.log(registrantHash)
+            this.$router.push({name:'selectBrand',params:{registrant_hash:registrantHash}});
         },
         alert(){
-            this.$toast.text('注册主体未认证，不能进行上架操作。',)
+            this.$toast.text('注册主体未认证，不能进行上架操作。')
         }
     }
 }

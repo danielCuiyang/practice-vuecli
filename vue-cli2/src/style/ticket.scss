@@ -5,6 +5,7 @@ html,body,#app,.layout{
 .ticket{ 
     .section{
         padding:0 .4rem;
+        background: #fff;
         &-header{
             @include clear;
             .personal{
@@ -24,24 +25,31 @@ html,body,#app,.layout{
         }
         ul{
             li{
-                @include hl(1rem);
-                border-bottom: 1px solid #f5f5f5;
+                @include hl(1.02rem);
+                box-sizing: border-box;
+                border-bottom: 0.02rem solid #f5f5f5;
+                position: relative;
                 .symbol{
                     @include fc(.3rem,#e33735);
+                    line-height: 1rem;
                 }
                 .left{
                     width: 1.44rem;
-                    display: inline-block;
+                    float: left;
                 }
                 .title{
                     @include fc(.3rem,#3b3b3b);
                     font-weight: 400;
+                    line-height: 1rem;
                 }
                 .msg{
                     @include fc(.3rem,#6c6c6c);
                     font-weight: 400; 
-                    padding-left: .65rem;
                     border:none;
+                    display: block;
+                    height:.32rem;
+                    padding:.33rem 0 ;
+                    padding-left: .65rem;
                 }
                 input::placeholder{
                     @include fc(.3rem,#c6c6c6);
@@ -50,12 +58,14 @@ html,body,#app,.layout{
                     @include fc(.3rem,#c6c6c6);
                 }
                 .link{
-                    float: right;
-                    @include wh(.24rem,100%);
+                    @include wh(.24rem,1rem);
                     background: url('../image/link.png')no-repeat;
-                    background-position: center;
+                    background-position: right;
                     background-size: .24rem .24rem;
-                    margin-left: .3rem;
+                    padding-left:0.3rem;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
                 }
             }
             .remark{

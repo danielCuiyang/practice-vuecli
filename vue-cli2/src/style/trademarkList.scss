@@ -1,9 +1,10 @@
 @import './base.scss';
-
 .navlist{
   height: .88rem;
   border-bottom: 0.2rem solid #F5F5F5;
+  overflow-x: auto;
   ul{
+    width: 120%;
     @include clear;
     li{
       font-size: .28rem;
@@ -40,7 +41,6 @@ ul.trademarkList{
     @include clear;
     .trademarkImg{
       width:2.18rem;
-      height:1.64rem;
       float: left;
       img{
         width: 100%;
@@ -174,6 +174,7 @@ ul.trademarkList{
 .sbServerList{
   .xqfwlb{
     width: 100%;
+    background: #fff;
     li{
       width: 100%;
       height: .9rem;
@@ -240,4 +241,64 @@ ul.trademarkList{
       display: block;
     }
   }
+}
+
+.dataNull{
+  width: 100%;
+  height: 5rem;
+  background: url(../../image/dataNull.png)no-repeat;
+  background-size: 3.82rem;
+  background-position: center 2rem ;
+  font-size: .28rem;
+  color: #666666;
+  text-align: center;
+  padding-top: 4.3rem;
+}
+.screen{
+  border-bottom: .2rem solid #F5F5F5;
+  @include clear;
+  z-index: 888;
+  position: relative;
+}
+.screen .screenchild{
+  float: left;
+  line-height: 1rem;
+  font-size: .3rem;
+  color: #999999;
+  text-align: center;
+  width: 50%;
+  background: url(../../image/select-icon.png)no-repeat;
+  background-size: .2rem;
+  background-position: 74% center;
+}
+.screen .screenchild.active{
+  background: url(../../image/selected-icon.png)no-repeat;
+  background-size: .2rem;
+  background-position: 74% center;
+  color: #E33735;
+}
+.screen .screenlist{
+  position: fixed;
+  top:2rem;left: 0;right: 0;bottom: 0;
+  margin: auto;background: rgba(0,0,0,0.6);
+  z-index: 888;
+}
+.screen .screenlist ul{
+  background: #fff;
+  border-top: 1px solid #F5F5F5;
+  max-height: 6rem;
+  overflow-y: auto;
+}
+.screen .screenlist ul li{
+  font-size: .28rem;
+  color: #333;
+  line-height: .8rem;
+  padding-left: .5rem;
+  box-sizing: border-box;
+}
+.screen .screenlist ul li.active{
+  background: url(../../image/select-right.jpg)no-repeat;
+  background-size: .3rem;
+  background-position: 95% center;
+  color: #E33735;
 }

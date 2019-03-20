@@ -14,7 +14,7 @@ const authTypeRouter = {
       meta: { title: '选择认证类型',showSearch:false,showEdit:false} 
     },
     {
-      path: 'authCompany',
+      path: 'authCompany/:registrant_hash',
       component: () => import('@/views/authenticationGroup/authCompany'),
       name: 'authCompany',
       //showSearch 控制是否显示头部搜索ICON
@@ -22,7 +22,7 @@ const authTypeRouter = {
       meta: { title: '企业认证',showSearch:false,showEdit:false} 
     },
     {
-      path: 'authPersonal',
+      path: 'authPersonal/:registrant_hash',
       component: () => import('@/views/authenticationGroup/authPersonal'),
       name: 'authPersonal',
       //showSearch 控制是否显示头部搜索ICON

@@ -1,6 +1,6 @@
 <template>
     <div class="agreement">
-        <Headers></Headers>
+        <Headers @goBack="goBack"></Headers>
         <div class="section">
             <p>
                 本协议由您与上海尚标互联网科技有限公司共同缔结，
@@ -173,14 +173,11 @@
         <div class="subBottom" v-show="showSubBottom">
             工作人员将在1-2个工作日内与您联系
         </div>
-        <div class="toast" v-show="showToast">
-            {{tipMsg}}
-        </div>
     </div>
 </template>
 <script>
 import Headers from '@/components/Header'
-import {agreement} from '@/api/faith'
+import {agreement,faith,bondsAdd} from '@/api/faith'
 import '@/style/faithDeposit/agreement.scss'
 import { setTimeout } from 'timers';
 export default {
@@ -191,30 +188,27 @@ export default {
         return{
             selected:false,
             tipMsg:"提交成功",
-            showToast:false,
-            showSubBottom:false
+            showSubBottom:false,
         }
     },
     created(){
-        this.getAgreement()//获取协议
     },
     methods:{
-        getAgreement(){
-            agreement().then((res)=>{
-                console.log(res,"res")
-            })
-        },
+        // getAgreement(){
+        //     agreement().then((res)=>{
+        //         console.log(res,"res")
+        //     })
+        // },
         applyJoin(){
             if(!this.selected){
-                this.tipMsg="请勾选协议"
+                this.$toast.text("请勾选协议")
             }else{
-                this.tipMsg = "提交成功"
-                this.showSubBottom = true
+                bondsAdd().then((res)=>{
+                     this.$toast.text("提交成功")
+                    this.showSubBottom = true
+                })
             }
-           this.showToast = true
-            setTimeout(()=>{
-                this.showToast = false
-            },3000)
+
         }
     }
 }

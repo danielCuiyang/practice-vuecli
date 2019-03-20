@@ -17,18 +17,18 @@
         <div class="select-popup">
             <div class="applicant" v-show="selectType=='1'">
                 <div 
-                v-for="(item,index) in applicantList" 
+                v-for="(item,index) in registrants" 
                 @click="choseApplicant(index,item)"
                 :key='index'
                 :class="{active:index==isChose}">
-                {{item.name}}
+                {{item.company_name}}
                 </div>
             </div>
             <div class="applicant" v-show="selectType=='2'">
                 <div 
                 v-for="(item,index) in brandTypeList" 
                 @click="choseBrandType(index,item)" 
-                :key='index'
+                :key='item.id'
                 :class="{active:index==brandChose}">
                 {{item.name}}
                 </div>
@@ -41,112 +41,33 @@
 
 <script>
 import '@/style/popup.scss'
+import { brandTypeList } from "@/utils/brandTypeList";
 export default {
     data(){
         return{
             //申请人列表弹框勾选
-            isChose:1,
+            isChose:0,
             //选择具体商标勾选
-            brandChose:1,
+            brandChose:0,
             // 类别 //不同类别下的弹框显示
-            selectType:0,
-            applicantList:[
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京"},
-                {name:"薛之谦"},
-                {name:"胡歌"},
-                {name:"林俊杰"},
-                {name:"吴京1"},
-            ],
-            brandTypeList:[
-                {name:"服装品牌"},
-                {name:"化工"},
-                {name:"香水"},
-                {name:"服装品牌"},
-                {name:"化工"},
-                {name:"香水"},
-                {name:"服装品牌"},
-                {name:"化工"},
-                {name:"香水"},
-                {name:"服装品牌"},
-                {name:"化工"},
-                {name:"香水"},
-                {name:"服装品牌"},
-                {name:"化工"},
-                {name:"香水"},
-                {name:"服装品牌"},
-                {name:"化工"},
-                {name:"香水"},
-                {name:"服装品牌"},
-                {name:"化工"},
-                {name:"香水"},
-            ]
+            selectType:this.select,
+            brandTypeList:brandTypeList
+        }
+    },
+    props:{
+        registrants:{
+            type:Array
+        },
+        select:{
+            type:Number
+        }
+    },
+    watch:{
+        selectType(val){
+            this.$emit("selectType",val)
+        },
+        select(val){
+            this.selectType = val
         }
     },
     methods:{

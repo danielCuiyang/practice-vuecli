@@ -2,6 +2,9 @@
 html,body,#app,.layout,.authCompany{
     height: 100%;
 }
+.layout{
+    padding: 0;
+}
 .authCompany{
     background: #f5f5f5;
     .image{
@@ -79,8 +82,12 @@ html,body,#app,.layout,.authCompany{
         border-radius: .08rem;
         display: block;
         margin: auto;
+        margin-top: 2.5rem;
         @include fct(.3rem,#fff,center);
         border:none;
+    }
+    .active{
+        background: #ccc;
     }
     .ticket-tip{
         @include wh(100%,1.02rem);

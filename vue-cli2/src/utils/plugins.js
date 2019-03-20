@@ -19,21 +19,15 @@ const plugin = {
         defaults[i] = $vm.$options.props[i].default
       }
     }
-    console.log(defaults,"defaults")
     const toast = {
       show (options = {}) {
-        // destroy watcher
         watcher && watcher()
-        // console.log(options,"options")
-        // console.log(typeof options,"options")
         if (typeof options === 'string') {
           mergeOptions($vm, objectAssign({}, pluginOptions, {text: options}))
         } else if (typeof options === 'object') {
-            console.log(123)
           mergeOptions($vm, objectAssign({}, pluginOptions, options))
         }
         if (typeof options === 'object' && options.onShow || options.onHide) {
-            console.log(456)
           watcher = $vm.$watch('show', (val) => {
             val && options.onShow && options.onShow($vm)
             val === false && options.onHide && options.onHide($vm)

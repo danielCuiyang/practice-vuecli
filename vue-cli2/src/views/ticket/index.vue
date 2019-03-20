@@ -1,6 +1,6 @@
 <template>
     <div class="ticket">
-        <Headers ></Headers>
+        <Headers @goBack="goBack"></Headers>
         <div class="section">
             <div class="section-header">
                 <div class="personal">
@@ -24,28 +24,38 @@
             </div>
             <ul>
                 <li>
-                    <span class="title">抬头类型</span>
-                    <span class="symbol">*</span>                    
-                    <input class="msg" 
-                    placeholder="选择抬头类型"
-                    :value="ticketForm.be_made | be_made" readonly/>
-                    <span class="link" @click="showTitleList=true"></span>
+                    <span class="left">
+                        <span class="title">抬头类型</span>
+                        <span class="symbol">*</span>     
+                    </span>
+                    <div @click="showTitleList=true">
+                        <input class="msg" 
+                        placeholder="选择抬头类型"
+                        :value="ticketForm.be_made | be_made" readonly/>
+                        <span class="link" ></span>
+                    </div>
                 </li>
                 <li>
-                    <span class="title">开票主体</span>
-                    <span class="symbol">*</span>
+                    <span class="left">
+                        <span class="title">开票主体</span>
+                        <span class="symbol">*</span>
+                    </span>
                     <input class="msg" 
                     placeholder="填写开票主体"
                   v-model="ticketForm.subject_name" />
                 </li>
                 <li>
-                    <span class="title">开票类型</span>
-                    <span class="symbol">*</span>
-                    <input class="msg" 
-                    readonly 
-                    placeholder="选择开票类型"
-                    :value="ticketForm.general | general" />
-                    <span class="link" @click="showTicketList=true"></span>
+                    <span class="left">
+                        <span class="title">开票类型</span>
+                        <span class="symbol">*</span>
+                    </span>
+                    <div  @click="showTicketList=true">
+                         <input class="msg" 
+                        readonly 
+                        placeholder="选择开票类型"
+                        :value="ticketForm.general | general" />
+                        <span class="link"></span>
+                    </div>
                 </li>
                 <li>
                     <span class="left">
@@ -57,15 +67,19 @@
                     v-model="ticketForm.tax_point"/>
                 </li>
                 <li v-show="ticketForm.be_made == '1'">
-                    <span class="title">身份证号</span>
-                    <span class="symbol">*</span>
+                    <span class="left">
+                        <span class="title">身份证号</span>
+                        <span class="symbol">*</span>
+                    </span>
                     <input class="msg" 
                     placeholder="填写身份证号"
                     v-model='ticketForm.idcard' />
                 </li>
                 <li v-show="ticketForm.be_made == '2' ">
-                    <span class="title">公司税号</span>
-                    <span class="symbol">*</span>
+                    <span class="left">
+                        <span class="title">公司税号</span>
+                        <span class="symbol">*</span>
+                    </span>
                     <input class="msg" 
                     placeholder="填写公司税号"
                     v-model="ticketForm.tfn" />
@@ -129,6 +143,7 @@
 
 <script>
 import Headers from '@/components/Header'
+import {urlParam} from '@/utils/url.js'
 import {invoiceSave,invoiceDetail} from "@/api/ticket"
 import "@/style/ticket.scss"
 export default {
@@ -137,8 +152,6 @@ export default {
     },
     data(){
         return{
-            //1是注册人，2是代理人
-
             // 增值税active
             ischose:'0',
             // 抬头active
@@ -148,7 +161,7 @@ export default {
             // 抬头类型显隐 
             showTitleList:false,
             ticketForm:{
-                character:"1",
+                character:"1",//1是注册人，2是代理人
                 be_made:'', //抬头类型 //1 个人 2 公司
                 subject_name:"", //开票主体
                 general:"" , //开票类型 //1普通 2//专用
@@ -179,11 +192,16 @@ export default {
         }
     },
     created(){
-        this.invoiceDetails()
+        // 获取从APP页面传来的选中开票主体的ID
+        let ticketId = urlParam.ticketId
+        if(ticketId){
+            this.ticketForm.id= ticketId
+            this.invoiceDetails()
+        }
     },
     methods:{
         validate(){
-            let form = this.ticketForm
+           let form = this.ticketForm
            if(!form.be_made){
                return {code:"error",msg:"请选择抬头类型"}
            }
@@ -207,9 +225,8 @@ export default {
            }
         },
         invoiceDetails(){
-            invoiceDetail().then((res)=>{
+            invoiceDetail(this.ticketForm.id).then((res)=>{
                 this.ticketForm = res.data
-                console.log(this.ticketForm)
                 if(res.data.be_made=='2'){
                     this.ticketForm.tfn = res.data.card_number
                 }else{
@@ -220,12 +237,15 @@ export default {
         submit(){
             let validResult=this.validate()
             if(validResult.code=='error'){
-                alert(validResult.msg);
+                this.$toast.text(validResult.msg)
                 return
             }
-            console.log(this.ticketForm)
             invoiceSave(this.ticketForm).then((res)=>{
-
+                 this.$toast.show({
+                    text:"提交成功",
+                    type:"success"
+                })
+                this.goBack()
             })
         },
         choseTicket(index){
