@@ -57,7 +57,8 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 10000, //小于limit 使用base64,可以减少一次图片的网络请求，对于比较大的base64就不合适了，编码会和html混在一起，一方面可读性差，
+          //另一方面加大了html页面的大小，反而加大了下载页面的大小，就得不偿失了，所以设置一个合理的limit是很有必要的
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
